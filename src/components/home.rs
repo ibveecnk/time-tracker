@@ -45,7 +45,7 @@ impl Component for Home {
         Ok(None)
     }
 
-    fn draw(&mut self, frame: &mut Frame, area: Rect) -> Result<()> {
+    fn draw(&mut self, frame: &mut Frame, _area: Rect) -> Result<()> {
         let layout = Layout::default()
             .direction(ratatui::layout::Direction::Vertical)
             .constraints(vec![
