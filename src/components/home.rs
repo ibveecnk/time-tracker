@@ -1,3 +1,5 @@
+use std::num::Wrapping;
+
 use color_eyre::Result;
 use ratatui::{prelude::*, widgets::*};
 use tokio::sync::mpsc::UnboundedSender;
@@ -9,6 +11,7 @@ use crate::{action::Action, config::Config};
 pub struct Home {
     command_tx: Option<UnboundedSender<Action>>,
     config: Config,
+    progress: Wrapping<u8>,
 }
 
 impl Home {
@@ -35,6 +38,7 @@ impl Component for Home {
             }
             Action::Render => {
                 // add any logic here that should run on every render
+                self.progress += Wrapping(1);
             }
             _ => {}
         }
@@ -42,7 +46,21 @@ impl Component for Home {
     }
 
     fn draw(&mut self, frame: &mut Frame, area: Rect) -> Result<()> {
-        frame.render_widget(Paragraph::new("Time Tracker"), area);
+        let layout = Layout::default()
+            .direction(ratatui::layout::Direction::Vertical)
+            .constraints(vec![
+                ratatui::layout::Constraint::Percentage(10),
+                ratatui::layout::Constraint::Percentage(70),
+                ratatui::layout::Constraint::Percentage(20),
+            ])
+            .split(frame.area());
+
+        frame.render_widget(Paragraph::new("Home"), layout[0]);
+        frame.render_widget(
+            Gauge::default().ratio(self.progress.0 as f64 / u8::MAX as f64),
+            layout[1],
+        );
+        frame.render_widget(Paragraph::new("Timer"), layout[2]);
         Ok(())
     }
 }
