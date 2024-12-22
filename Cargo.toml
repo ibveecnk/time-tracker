@@ -2,6 +2,7 @@
 name = "time-tracker-app"
 version = "0.1.1"
 edition = "2021"
+license = "MIT"
 description = "Tool for clocking in and out as well as adding descriptions"
 authors = ["Iven Beck <ivenbeck@outlook.de>"]
 build = "build.rs"
