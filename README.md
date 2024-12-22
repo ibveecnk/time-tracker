@@ -4,4 +4,4 @@
 
 Tool for clocking in and out as well as adding descriptions
 
-> Create a release with `git push origin tag vx.y.z`
+> Create a release with `git tag vx.y.z` and `git push origin tag vx.y.z`
