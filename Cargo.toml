@@ -1,6 +1,6 @@
 [package]
 name = "time-tracker-app"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Tool for clocking in and out as well as adding descriptions"
 authors = ["Iven Beck <ivenbeck@outlook.de>"]
